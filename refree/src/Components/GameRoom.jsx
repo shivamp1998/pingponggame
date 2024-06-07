@@ -71,6 +71,8 @@ const GameRoom = () => {
       setScoreBoard(data);
     });
     playerSocket.on("winner", (data) => {
+      setAttackNo(null);
+      setDefenseArray([])
       setTimeout(() => {
         setWinner(data);
         if (player.name !== data) {
@@ -171,6 +173,7 @@ const GameRoom = () => {
                   color="primary"
                   onClick={handleAttack}
                   sx={{ marginTop: "1rem" }}
+                  disabled={attackNo}
                 >
                   Attack
                 </Button>
@@ -192,6 +195,7 @@ const GameRoom = () => {
                   color="primary"
                   onClick={handleDefense}
                   sx={{ marginTop: "1rem" }}
+                  disabled={!attackNo}
                 >
                   Defend
                 </Button>
